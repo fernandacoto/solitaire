@@ -1,18 +1,10 @@
 class GameController < ApplicationController
   def play
-    @test_hash = []
+    initialize_variables
     params[:movement] ||={}
     @result = "Buuu"
     if params[:commit] == "Play"
-      @result = "Play"
-      @test_hash = [[{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
-                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
-                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
-                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
-                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
-                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
-                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}]]
-      #initialize game
+        initialize_game
     elsif params[:commit] == "Move"
       if !params[:movement][:option].blank? and !params[:movement][:stack_number].blank?
         which_case(params[:movement])
@@ -20,7 +12,19 @@ class GameController < ApplicationController
       end
     end
   end
+  def initialize_variables
+    @feeder_line = []
+    @loading_deck = []
+  end
 
+  def initialize_game
+    @deck_instance= Deck.new
+    @feeder_instance = FeederLine.new
+    @loading_instance = LoadingDeck.new
+    deck = @deck_instance.create_deck
+    @feeder_line = @feeder_instance.create_feeder_deck(deck)
+    @loading_deck= @loading_instance.create_loading_deck(deck)
+  end
 private
 
   def which_case(option_move)
