@@ -1,0 +1,14 @@
+<h1>Play</h1>
+<%=form_for :movement do |f|%>
+  1. From loading deck to feeder line <br>
+  2. From loading deck to product line <br>
+  3. From feeder line to feeder line <br>
+  4. From feeder line to product line <br>
+  5. From product line to feeder line <br>
+  Option:<%= f.text_field :option, :type => "number"  %>Stack:<%= f.text_field :stack_number, :type => "number" %><br>
+  <%= f.submit "Move" %>
+<%end%>
+<%if !@result.blank?%>
+  <%= @result.inspect%>
+<%end%>
+
