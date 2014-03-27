@@ -29,6 +29,3 @@ class Deck
     @deck << Card.new(:number => "K", :value => 13, :color => color, :symbol => symbol, :state => "None", :visible => 0)
   end
 end 
-
-
-
