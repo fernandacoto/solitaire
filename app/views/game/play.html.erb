@@ -1,11 +1,68 @@
 <h1>Play</h1>
+<div id="feeder_line" align="center">
+  <table>
+    <tr>
+      <td>
+        <%= image_tag("feeder_line.png", size: "100x200", style:"margin:5px")%>
+      </td>
+      <td>
+        <%= image_tag("feeder_line.png", size: "100x200", style:"margin:5px")%>
+      </td>
+      <td>
+        <%= image_tag("feeder_line.png", size: "100x200", style:"margin:5px")%>
+      </td>
+      <td>
+        <%= image_tag("feeder_line.png", size: "100x200", style:"margin:5px")%>
+      </td>
+      <td>
+        <%= image_tag("feeder_line.png", size: "100x200", style:"margin:5px")%>
+      </td>
+      <td>
+        <%= image_tag("feeder_line.png", size: "100x200", style:"margin:5px")%>
+      </td>
+      <td>
+        <%= image_tag("feeder_line.png", size: "100x200", style:"margin:5px")%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Stack 1
+      </td>
+      <td>
+        Stack 2
+      </td>
+      <td>
+        Stack 3
+      </td>
+      <td>
+        Stack 4
+      </td>
+      <td>
+        Stack 5
+      </td>
+      <td>
+        Stack 6
+      </td>
+      <td>
+        Stack 7
+      </td>
+    </tr>
+  <table>
+</div>
+<div id="product_line" align="center" style="margin-top:200px;">
+  <%= image_tag("product_line.jpeg", size: "100x200", style:"margin:5px")%>
+  <%= image_tag("product_line.jpeg", size: "100x200", style:"margin:5px")%>
+  <%= image_tag("product_line.jpeg", size: "100x200", style:"margin:5px")%>
+  <%= image_tag("product_line.jpeg", size: "100x200", style:"margin:5px")%>
+  <%= image_tag("loading_deck.jpeg", size: "100x200", style:"margin:5px 5px 5px 70px; ")%>
+</div>
 <%=form_for :movement do |f|%>
   1. From loading deck to feeder line <br>
   2. From loading deck to product line <br>
   3. From feeder line to feeder line <br>
   4. From feeder line to product line <br>
   5. From product line to feeder line <br>
-  Option:<%= f.text_field :option, :type => "number"  %>Stack:<%= f.text_field :stack_number, :type => "number" %><br>
+  Option:<%= f.text_field :option, :type => "number"  %>From/to:<%= f.text_field :stack_number_init, :type => "number" %>To:<%= f.text_field :stack_number_destiny, :type => "number"%><br>
   <%= f.submit "Move" %>
 <%end%>
 <%if !@result.blank?%>
