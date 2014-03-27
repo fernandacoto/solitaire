@@ -1,5 +1,5 @@
 class Card
-  attr_accessor :number, :value, :color, :symbol, :state
+  attr_accessor :number, :value, :color, :symbol, :state, :visible
 
   def initialize(attributes = {})
   	@number=attributes[:number]
@@ -7,9 +7,6 @@ class Card
     @color=attributes[:color]
     @symbol=attributes[:symbol]
     @state=attributes[:state]
- end
-
- def to_s
-   "#{@number} of #{@symbol}"
+    @visible=attributes[:visible]
  end
 end
