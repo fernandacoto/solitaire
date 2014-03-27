@@ -7,13 +7,11 @@ class FeederLine
 
   def create_feeder_deck(deck)
   	deck.shuffle!
-  	fill_feeder_line(1,deck)
-  	fill_feeder_line(2,deck)
-  	fill_feeder_line(3,deck)
-  	fill_feeder_line(4,deck)
-  	fill_feeder_line(5,deck)
-  	fill_feeder_line(6,deck)
-  	fill_feeder_line(7,deck)
+  	number_cards = 1
+  	while number_cards < 8
+  	  fill_feeder_line(number_cards,deck)
+  	  number_cards = number_cards + 1
+  	end 
   	@feeder_deck
   end
 
@@ -25,8 +23,11 @@ class FeederLine
   def fill_feeder_line_with_state(number_feeder,number_deck,number_cards,deck)
   	while number_feeder < number_cards
       if deck[number_deck].state == "None"
-      	@feeder_line << deck[number_deck]
-      	deck[number_deck].state = "FL" 	
+      	deck[number_deck].state = "FL"
+      	if (number_cards - number_feeder) == 1
+          deck[number_deck].visible = 1
+        end
+      	@feeder_line << deck[number_deck]	
         number_feeder = number_feeder + 1
       end
       number_deck = number_deck + 1
