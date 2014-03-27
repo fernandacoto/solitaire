@@ -1,10 +1,23 @@
 class GameController < ApplicationController
   def play
+    @test_hash = []
     params[:movement] ||={}
-    @result = ""
-    if !params[:movement][:option].blank? and !params[:movement][:stack_number].blank?
-      which_case(params[:movement])
-      @result = "result in there #{params[:movement][:option]} and #{params[:movement][:stack_number]}"
+    @result = "Buuu"
+    if params[:commit] == "Play"
+      @result = "Play"
+      @test_hash = [[{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
+                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
+                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
+                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
+                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
+                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}],
+                    [{:number => 1, :color => "red" ,:value => "A" , :symbol => "Hearts", :state =>"V"}]]
+      #initialize game
+    elsif params[:commit] == "Move"
+      if !params[:movement][:option].blank? and !params[:movement][:stack_number].blank?
+        which_case(params[:movement])
+        @result = "result in there #{params[:movement][:option]} and #{params[:movement][:stack_number]}"
+      end
     end
   end
 
