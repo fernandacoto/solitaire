@@ -11,10 +11,13 @@ class LoadingDeck
   end
 
   def fill_loading_deck(deck)
-    deck.each do |card|
+    deck.each_with_index do |card, index|
       if card.state == "None"
-      	@loading_deck << card
       	card.state = "LD" 
+      	if index == deck.size - 1
+      	  card.visible = 1
+      	end
+      	@loading_deck << card
       end
     end
   end
