@@ -4,7 +4,19 @@
   <%= image_tag("product_line.jpeg", size: "100x200", style:"margin:5px")%>
   <%= image_tag("product_line.jpeg", size: "100x200", style:"margin:5px")%>
   <%= image_tag("product_line.jpeg", size: "100x200", style:"margin:5px")%>
-  <%= image_tag("loading_deck.jpeg", size: "100x200", style:"margin:5px 5px 5px 70px; ")%>
+  <div style="float:right; margin-right:200px">
+    <%= image_tag("loading_deck.jpeg", size: "100x200", style:"margin:5px 5px 5px 70px; ")%>
+    <ul>
+      <% if !@loading_deck.nil?%>
+       <% card = return_visible_cards(@loading_deck) %>
+         <% card.each do |card|%>
+            <li>
+              <%= card.number%> -> <%= card.color%>-> <%= card.symbol%><br>
+            </li>
+          <%end%>
+        <%end%>
+     </ul>
+  </div>
 </div>
 <div id="feeder_line" align="center" style="margin-botom:200px;">
   <table>
@@ -31,12 +43,12 @@
         <%= image_tag("feeder_line.png", size: "100x200", style:"margin:5px")%>
       </td>
     </tr>
-    <% if !@feeder_line.empty? %>
+    <% if !@feeder_line.nil? %>
     <tr>
       <td align="center">
         Stack 1 <br>
         <ul>
-            <% card = return_feeder_line(@feeder_line[0]) %>
+            <% card = return_visible_cards(@feeder_line[0]) %>
             <% card.each do |card|%>
               <li>
                 <%= card.number%> -> <%= card.color%>-> <%= card.symbol%><br>
@@ -47,7 +59,7 @@
       <td align="center">
         Stack 2 <br>
         <ul>
-            <% card = return_feeder_line(@feeder_line[1]) %>
+            <% card = return_visible_cards(@feeder_line[1]) %>
             <% card.each do |card|%>
               <li>
                 <%= card.number%> -> <%= card.color%>-> <%= card.symbol%><br>
@@ -58,7 +70,7 @@
       <td align="center">
         Stack 3 <br>
         <ul>
-            <% card = return_feeder_line(@feeder_line[2]) %>
+            <% card = return_visible_cards(@feeder_line[2]) %>
             <% card.each do |card|%>
               <li>
                 <%= card.number%> -> <%= card.color%>-> <%= card.symbol%><br>
@@ -69,7 +81,7 @@
       <td align="center">
         Stack 4 <br>
         <ul>
-            <% card = return_feeder_line(@feeder_line[3]) %>
+            <% card = return_visible_cards(@feeder_line[3]) %>
             <% card.each do |card|%>
               <li>
                 <%= card.number%> -> <%= card.color%>-> <%= card.symbol%><br>
@@ -80,7 +92,7 @@
       <td align="center">
         Stack 5 <br>
         <ul>
-            <% card = return_feeder_line(@feeder_line[4]) %>
+            <% card = return_visible_cards(@feeder_line[4]) %>
             <% card.each do |card|%>
               <li>
                 <%= card.number%> -> <%= card.color%>-> <%= card.symbol%><br>
@@ -91,7 +103,7 @@
       <td align="center">
         Stack 6 <br>
         <ul>
-            <% card = return_feeder_line(@feeder_line[5]) %>
+            <% card = return_visible_cards(@feeder_line[5]) %>
             <% card.each do |card|%>
               <li>
                 <%= card.number%> -> <%= card.color%>-> <%= card.symbol%><br>
@@ -102,7 +114,7 @@
       <td align="center">
         Stack 7 <br>
         <ul>
-            <% card = return_feeder_line(@feeder_line[6]) %>
+            <% card = return_visible_cards(@feeder_line[6]) %>
             <% card.each do |card|%>
               <li>
                 <%= card.number%> -> <%= card.color%>-> <%= card.symbol%><br>
@@ -122,6 +134,12 @@
   4. From feeder line to product line <br>
   5. From product line to feeder line <br>
   Option:<%= f.text_field :option, :type => "number"  %>From/to:<%= f.text_field :stack_number_init, :type => "number" %>To:<%= f.text_field :stack_number_destiny, :type => "number"%><br>
+  <% if !@feeder_line.nil? %>
+    <%= f.hidden_field :feeder_line, :value => @feeder_line %>
+  <%end%>
+  <% if !@loading_deck.nil?%>
+    <%= f.hidden_field :loading_deck, :value => @loading_deck %>
+  <%end%>
   <%= f.submit "Move" %>
   <%= f.submit "Play"%>
   <%= f.submit "Next Card"%>

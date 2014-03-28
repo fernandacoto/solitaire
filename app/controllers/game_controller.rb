@@ -1,20 +1,20 @@
 class GameController < ApplicationController
   def play
-    initialize_variables
     params[:movement] ||={}
     @result = "Buuu"
     if params[:commit] == "Play"
         initialize_game
+    elsif params[:commit] == "Next Card"
+      deck = params[:movement][:loading_deck]
+      @loading_instance = LoadingDeck.new
+      logger.info " \n  DECK  \n  #{deck.inspect} \n ******************** \n"
+      @loading_deck = @loading_instance.next_card(deck)
     elsif params[:commit] == "Move"
       if !params[:movement][:option].blank? and !params[:movement][:stack_number].blank?
         which_case(params[:movement])
         @result = "result in there #{params[:movement][:option]} and #{params[:movement][:stack_number]}"
       end
     end
-  end
-  def initialize_variables
-    @feeder_line = []
-    @loading_deck = []
   end
 
   def initialize_game

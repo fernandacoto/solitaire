@@ -21,4 +21,31 @@ class LoadingDeck
       end
     end
   end
+
+  def next_card(loading_deck)
+    index = find_visible_card(loading_deck)
+    loading_deck = update_visible_card(loading_deck,index)
+  end
+
+  def find_visible_card(loading_deck)
+   size = loading_deck.size
+   position = 0
+   while position < size
+     index = position if loading_deck[position].visible == 1
+     position += 1
+   end
+   index
+  end
+
+  def update_visible_card(loading_deck,index)
+    case index
+    when 0
+      loading_deck[index].visible = 0
+      loading_deck[(loading_deck.size - 1)].visible = 1
+    else
+      loading_deck[index].visible = 0
+      loading_deck[(index - 1)].visible = 1
+    end
+    loading_deck
+  end
 end 

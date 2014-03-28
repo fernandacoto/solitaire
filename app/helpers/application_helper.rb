@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def return_feeder_line(feeder_line)
+  def return_visible_cards(feeder_line)
     visible_cards = []
     feeder_line.each do |card|
       if card.visible == 1
