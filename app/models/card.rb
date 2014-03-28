@@ -1,4 +1,4 @@
-class Card
+class Card < ActiveRecord::Base
   attr_accessor :number, :value, :color, :symbol, :state, :visible
 
   def initialize(attributes = {})
