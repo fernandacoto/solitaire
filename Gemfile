@@ -9,7 +9,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
-#DB
 gem 'pg'
 
 group :doc do
