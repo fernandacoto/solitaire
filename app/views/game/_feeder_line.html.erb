@@ -1,0 +1,26 @@
+<div id="feeder_line" align="center" style="margin-botom:200px;">
+<table>
+  <tr>
+    <% 7.times do %>
+    <td> <%= image_tag("feeder_line.png", size: "100x200", style:"margin:5px")%> </td>
+    <% end %>
+  </tr>
+
+  <% if @feeder_line.present? %>
+    <tr>
+    <% @feader_line.each_with_index do |line, index| %>
+      <td align="center">
+        <%= "Stack #{index+1}" %>
+        <br>
+        <ul>
+          <% card = return_visible_cards(line) %>
+          <% card.each do |card|%>
+            <li> <%= card.number%> -> <%= card.color%>-> <%= card.symbol%><br> </li>
+          <% end %>
+        </ul>
+      </td>
+    <% end %>
+  </tr>
+  <% end %>
+<table>
+</div>
