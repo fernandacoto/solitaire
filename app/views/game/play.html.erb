@@ -13,14 +13,15 @@
   From/to:<%= f.text_field :stack_number_init, :type => "number" %>
   To:<%= f.text_field :stack_number_destiny, :type => "number"%><br>
 
-  <%= f.hidden_field :feeder_line, :value => @feeder_line unless @feeder_line.present? %>
-  <%= f.hidden_field :loading_deck, :value => @loading_deck unless @loading_deck.present? %>
+  <% @loading_deck.each do |line| %>
+    <%= hidden_field_tag "movement[loading_deck][]", line %>
+  <% end if @loading_deck.present? %>
+
+  <% @feeder_line.each do |line| %>
+    <%= hidden_field_tag "movement[feeder_line][]", line %>
+  <% end if @feeder_line.present? %>
 
   <%= f.submit "Move" %>
   <%= f.submit "Play"%>
   <%= f.submit "Next Card"%>
-<%end%>
-
-<%if !@loading_deck.nil?%>
-  <%= @loading_deck.inspect%><br><br>
 <%end%>
