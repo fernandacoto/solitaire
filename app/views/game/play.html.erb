@@ -13,8 +13,8 @@
   From/to:<%= f.text_field :stack_number_init, :type => "number" %>
   To:<%= f.text_field :stack_number_destiny, :type => "number"%><br>
 
-  <%= f.hidden_field :feeder_line, :value => @feeder_line unless @feeder_line.present? %>
-  <%= f.hidden_field :loading_deck, :value => @loading_deck unless @loading_deck.present? %>
+  <%= f.hidden_field :feeder_line, :value => @feeder_line if !@feeder_line.nil? %>
+  <%= f.hidden_field :loading_deck, :value => @loading_deck if !@loading_deck.nil? %>
 
   <%= f.submit "Move" %>
   <%= f.submit "Play"%>

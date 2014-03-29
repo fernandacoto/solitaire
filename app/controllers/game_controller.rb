@@ -7,7 +7,7 @@ class GameController < ApplicationController
     elsif params[:commit] == "Next Card"
       deck = params[:movement][:loading_deck]
       @loading_instance = LoadingDeck.new
-      logger.info " \n  DECK  \n  #{deck.inspect} \n ******************** \n"
+      logger.info " \n  DECK  \n  #{deck} \n ******************** \n"
       @loading_deck = @loading_instance.next_card(deck)
     elsif params[:commit] == "Move"
       if !params[:movement][:option].blank? and !params[:movement][:stack_number].blank?
