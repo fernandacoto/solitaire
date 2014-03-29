@@ -38,43 +38,62 @@ class FeederLine
     @feeder_deck << @feeder_line 
   end
 
-  def move_from_feeder_line(feeder_move_one, feeder_move_two)
-  	feeder_line_size_one = @feeder_deck[feeder_move_one].size
-  	feeder_line_size_two = @feeder_deck[feeder_move_two].size
-    if !@feeder_deck[feeder_move_two].empty?
-      @feeder_deck[feeder_move_two][feeder_line_size_two - 1].visible = 0	
-    end
-    @feeder_deck[feeder_move_two] << @feeder_deck[feeder_move_one][feeder_line_size_one - 1]
-    @feeder_deck[feeder_move_one].delete_at(feeder_line_size_one - 1)
-    if !@feeder_deck[feeder_move_one].empty?
-      @feeder_deck[feeder_move_one][feeder_line_size_one - 1].visible = 1	
-    end
+  def move_from_feeder_line(feeder_move_one,feeder_move_two)
+    change_visible_feeder_to_zero(feeder_move_two)
+    change_card_from_feeder(feeder_move_one,feeder_move_two)
+    change_visible_feeder_to_one(feeder_move_one)
   end
 
-  def move_from_product_line(product_move,feeder_moveproduct_line)
-  	feeder_line_size = @feeder_deck[feeder_move].size
-    product_line_size = product_line[product_move].size
-    if !@feeder_deck[feeder_move].empty?
-      @feeder_deck[feeder_move][feeder_line_size - 1].visible = 0
-    end
-    product_line[product_move][product_line_size - 1].state = "FL"
-    @feeder_deck[feeder_move] << product_line[product_move][product_line_size - 1]
-    product_line[product_move].delete_at(product_line_size - 1)
-    if !product_line[product_move].empty?
-      product_line[product_move][product_line_size - 1].visible = 1	
-    end
+  def move_from_product_line(product_move,feeder_move,product_line)
+    change_visible_feeder_to_zero(feeder_move)
+    change_state(product_line[product_move][product_size - 1])
+    change_card_from_deck(product_line[product_move],feeder_move)
+    change_visible_deck(product_line[product_move])
   end
 
   def move_from_loading_deck(loading_move,feeder_move,loading_deck)
-  	feeder_line_size = @feeder_deck[feeder_move].size
-  	loading_deck_size = loading_deck.size
-  	if !@feeder_deck[feeder_move].empty?
-      @feeder_deck[feeder_move][feeder_line_size - 1].visible = 0
-    end
-  	loading_deck[loading_move].state = "FL"
-  	@feeder_deck[feeder_move] << loading_deck[loading_deck_size - 1]
-    loading_deck.delete_at(loading_deck_size - 1)
-  	if !loading_deck.empty?
-      loading_deck[loading_deck_size - 1].visible = 1	
-    end
+    change_visible_feeder_to_zero(feeder_move)
+  	change_state(loading_deck[loading_move])
+    change_card_from_deck(loading_deck,feeder_move)
+    change_visible_deck(loading_deck)
+  end
+
+  def change_card_from_feeder(move_one,move_two)
+    feeder_size = get_size_feeder(move_one)
+    @feeder_deck[move_two] << @feeder_deck[move_one][feeder_size - 1]
+    @feeder_deck[move_one].delete_at(feeder_size - 1)
+  end
+
+  def change_card_from_deck(deck,move)
+    loading_size = get_size(deck)
+    @feeder_deck[move] << deck[loading_size - 1]
+    deck.delete_at(loading_size - 1)
+  end
+
+  def change_state(deck)
+    deck.state = "FL"
+  end
+
+  def change_visible_feeder_to_zero(move)
+    feeder_size = get_size_feeder(move)
+    @feeder_deck[move][feeder_size - 1].visible = 0 if !@feeder_deck[move].empty?
+  end
+
+  def change_visible_feeder_to_one(move)
+    feeder_size = get_size_feeder(move)
+    @feeder_deck[move][feeder_size - 1].visible = 1 if !@feeder_deck[move].empty?
+  end
+
+  def change_visible_deck(deck)
+    size = get_size(deck)
+    deck[size - 1].visible = 1 if !deck.empty
+  end
+
+  def get_size_feeder(move)
+    @feeder_deck[move].size
+  end
+
+  def get_size_deck(deck)
+    deck.size
+  end
 end
