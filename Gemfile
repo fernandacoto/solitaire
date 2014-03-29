@@ -9,6 +9,9 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
+gem 'awesome_print', '1.2.0'
+
+#DB
 gem 'pg'
 
 group :doc do

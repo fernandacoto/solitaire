@@ -3,7 +3,7 @@ class GameController < ApplicationController
     params[:movement] ||={}
     @result = "Buuu"
     if params[:commit] == "Play"
-        initialize_game
+      initialize_game
     elsif params[:commit] == "Next Card"
       deck = params[:movement][:loading_deck]
       @loading_instance = LoadingDeck.new
@@ -23,7 +23,7 @@ class GameController < ApplicationController
     @loading_instance = LoadingDeck.new
     deck = @deck_instance.create_deck
     @feeder_line = @feeder_instance.create_feeder_deck(deck)
-    @loading_deck= @loading_instance.create_loading_deck(deck)
+    @loading_deck = @loading_instance.create_loading_deck(deck)
   end
 private
 

@@ -6,7 +6,7 @@
   <div style="float:right; margin-right:200px">
     <%= image_tag("loading_deck.jpeg", size: "100x200", style:"margin:5px 5px 5px 70px; ")%>
     <ul>
-      <% if !@loading_deck.nil?%>
+      <% if @loading_deck.present? %>
        <% card = return_visible_cards(@loading_deck) %>
          <% card.each do |card|%>
             <li> <%= card.number%> -> <%= card.color%>-> <%= card.symbol%><br> </li>
