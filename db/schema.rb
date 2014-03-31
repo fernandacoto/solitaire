@@ -11,8 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140328215752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cards", force: true do |t|
+    t.string  "number"
+    t.string  "suit"
+    t.boolean "in_use"
+    t.integer "deck_id"
+  end
+
+  create_table "decks", force: true do |t|
+    t.integer "game_id"
+  end
+
+  create_table "feeder_lines", force: true do |t|
+    t.integer "card_id"
+    t.integer "game_id"
+  end
+
+  create_table "games", force: true do |t|
+  end
+
+  create_table "product_lines", force: true do |t|
+    t.integer "card_id"
+    t.integer "game_id"
+  end
+
 end

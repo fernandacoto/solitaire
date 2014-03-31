@@ -1,12 +1,7 @@
 class Card < ActiveRecord::Base
-  attr_accessor :number, :value, :color, :symbol, :state, :visible
-
-  def initialize(attributes = {})
-  	@number=attributes[:number]
-    @value=attributes[:value]
-    @color=attributes[:color]
-    @symbol=attributes[:symbol]
-    @state=attributes[:state]
-    @visible=attributes[:visible]
- end
+  belongs_to :deck
+  has_many :feeder_lines
+  has_many :feeder_cards, through: :feeder_lines, source: :game
+  has_many :product_lines
+  has_many :product_cards, through: :product_lines, source: :game
 end
